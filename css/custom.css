@@ -1,0 +1,904 @@
+/* ============================================
+   Lucky Stone — Golden Stone 金石風格 UI/UX
+   ============================================
+   Complete CSS-only redesign for Mainroad theme.
+   Rollback: git checkout -- static/css/custom.css
+   ============================================ */
+
+/* ===========================================
+   1. CSS Custom Properties
+   =========================================== */
+:root {
+  /* Core palette */
+  --gold: #c6a97d;
+  --gold-light: #d4bf9a;
+  --gold-dark: #a88c5e;
+  --brown-dark: #3d2e1f;
+  --brown-mid: #6b5d4f;
+  --brown-light: #a89279;
+  --cream: #f8f4f0;
+  --cream-dark: #f3ede6;
+  --border: #e8ddd0;
+  --white: #ffffff;
+  --code-text: #8b5e3c;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(139, 115, 85, 0.06),
+                 0 4px 8px rgba(139, 115, 85, 0.06),
+                 0 8px 20px rgba(139, 115, 85, 0.05),
+                 0 16px 40px rgba(139, 115, 85, 0.03);
+  --shadow-card-hover: 0 2px 6px rgba(139, 115, 85, 0.08),
+                       0 6px 16px rgba(139, 115, 85, 0.08),
+                       0 12px 28px rgba(139, 115, 85, 0.07),
+                       0 20px 48px rgba(139, 115, 85, 0.05);
+  --shadow-container: 0 2px 8px rgba(139, 115, 85, 0.05),
+                      0 8px 24px rgba(139, 115, 85, 0.05),
+                      0 16px 48px rgba(139, 115, 85, 0.04),
+                      0 24px 64px rgba(139, 115, 85, 0.03);
+  --shadow-small: 0 1px 4px rgba(139, 115, 85, 0.08),
+                  0 2px 8px rgba(139, 115, 85, 0.06);
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 20px;
+  --radius-circle: 50%;
+
+  /* Animation */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration: 0.3s;
+  --duration-slow: 0.5s;
+}
+
+/* ===========================================
+   2. Base & Container
+   =========================================== */
+body {
+  font-family: "Noto Sans TC", "Open Sans", sans-serif;
+  font-size: 15px;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  background: var(--cream);
+  color: var(--brown-dark);
+}
+
+.container--outer {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-container);
+  overflow: hidden;
+}
+
+.wrapper {
+  background: var(--white);
+  padding: var(--space-lg);
+}
+
+/* ===========================================
+   3. Header / Logo — centered + decorative stars
+   =========================================== */
+.header {
+  background: var(--cream);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--cream);
+  padding: var(--space-lg) var(--space-md);
+}
+
+.logo__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo__image {
+  border-radius: var(--radius-circle);
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(198, 169, 125, 0.15),
+              var(--shadow-small);
+  margin-bottom: var(--space-sm);
+}
+
+.logo__title {
+  color: var(--brown-dark);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+  padding: 0 2.2em;
+}
+
+.logo__title::before,
+.logo__title::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 0.65em;
+  opacity: 0.7;
+}
+
+.logo__title::before {
+  left: 0;
+}
+
+.logo__title::after {
+  right: 0;
+}
+
+.logo__tagline {
+  color: var(--brown-light);
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  margin-top: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: none;
+  position: relative;
+}
+
+.logo__tagline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ===========================================
+   4. Divider — gradient line + diamond
+   =========================================== */
+.divider {
+  background: transparent;
+  height: auto;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+}
+
+.divider::after {
+  content: "◆";
+  position: relative;
+  z-index: 1;
+  color: var(--gold);
+  font-size: 10px;
+  background: var(--cream);
+  padding: 0 12px;
+  line-height: 1;
+}
+
+/* ===========================================
+   5. Main Menu
+   =========================================== */
+.menu__btn {
+  background: var(--brown-dark);
+}
+
+.menu__list {
+  background: var(--brown-dark);
+}
+
+.menu__item:hover {
+  background: var(--gold);
+}
+
+.menu__item--active {
+  background: var(--gold);
+}
+
+.menu__link {
+  letter-spacing: 2px;
+}
+
+@media screen and (min-width: 767px) {
+  .menu {
+    border-bottom: 2px solid var(--gold);
+  }
+}
+
+/* ===========================================
+   6. Typography
+   =========================================== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--brown-dark);
+}
+
+h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+a {
+  color: var(--brown-dark);
+  transition: color var(--duration) var(--ease-out);
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+figcaption {
+  color: var(--brown-mid);
+}
+
+hr {
+  border-top: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+blockquote {
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(135deg, rgba(198, 169, 125, 0.06), rgba(248, 244, 240, 0.8));
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-left: 0;
+}
+
+/* Article-internal h2 with gold underline accent */
+.content h2 {
+  position: relative;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.content h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 2px;
+}
+
+code {
+  background-color: var(--cream-dark);
+  border-color: var(--border);
+  color: var(--code-text);
+}
+
+pre {
+  color: var(--brown-dark);
+}
+
+pre, code {
+  background-color: var(--cream-dark);
+  border-color: var(--border);
+}
+
+kbd {
+  background-color: var(--brown-dark);
+}
+
+mark {
+  background-color: #f5e6c8;
+}
+
+/* Content links */
+.content a,
+.warning a,
+.authorbox__description a {
+  color: var(--gold);
+  text-decoration-color: rgba(198, 169, 125, 0.3);
+}
+
+.content a:hover,
+.warning a:hover,
+.authorbox__description a:hover {
+  color: var(--gold-dark);
+  text-decoration-color: var(--gold);
+}
+
+/* ===========================================
+   7. Post List Cards — floating cards + hover gold bar
+   =========================================== */
+.list__item {
+  position: relative;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--duration) var(--ease-out),
+              box-shadow var(--duration) var(--ease-out);
+  overflow: hidden;
+}
+
+/* Left gold accent bar on hover */
+.list__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.list__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.list__item:hover::before {
+  opacity: 1;
+}
+
+.list__header {
+  margin-bottom: var(--space-xs);
+}
+
+.list__title {
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+.list__thumbnail {
+  max-width: 235px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.list__thumbnail img {
+  border-radius: var(--radius-md);
+  max-height: 180px;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.list__item:hover .list__thumbnail img {
+  transform: scale(1.03);
+}
+
+/* Read More Link — inline text style, no button look */
+.list__footer-readmore.btn {
+  display: inline-block;
+  background: transparent !important;
+  color: var(--brown-light) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  font-weight: 400 !important;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.list__footer-readmore.btn::after {
+  content: " →";
+  transition: margin-left var(--duration) var(--ease-out);
+  margin-left: 0;
+  display: inline-block;
+}
+
+.list__footer-readmore.btn:hover {
+  background: transparent !important;
+  color: var(--gold) !important;
+}
+
+.list__footer-readmore.btn:hover::after {
+  margin-left: 4px;
+}
+
+/* ===========================================
+   8. Post Meta
+   =========================================== */
+.meta,
+.meta a {
+  color: var(--brown-light);
+  font-size: 0.6875rem;
+  letter-spacing: 1px;
+}
+
+.meta a:hover {
+  color: var(--gold);
+}
+
+.meta__icon {
+  fill: var(--gold);
+}
+
+.post__meta {
+  border-top: 1px dotted var(--border);
+  border-bottom: 1px dotted var(--border);
+}
+
+/* ===========================================
+   9. Single Post — centered header + decorative meta lines
+   =========================================== */
+.post__header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.post__title {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: var(--space-md);
+}
+
+.post__meta {
+  position: relative;
+  padding: var(--space-md) 0;
+  margin: var(--space-md) 0 var(--space-lg);
+}
+
+.post__meta::before,
+.post__meta::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+
+.post__meta::before {
+  top: 0;
+}
+
+.post__meta::after {
+  bottom: 0;
+}
+
+.post__thumbnail img {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* ===========================================
+   10. Tags
+   =========================================== */
+.tags__item {
+  background: var(--brown-dark);
+  border-radius: var(--radius-pill);
+  transition: background var(--duration) var(--ease-out);
+}
+
+.tags__item:hover {
+  background: var(--gold);
+}
+
+.tags__link,
+.tags__link:hover {
+  padding: 6px 14px;
+}
+
+.tags__badge {
+  background: var(--gold);
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+}
+
+/* ===========================================
+   11. Table of Contents
+   =========================================== */
+.toc {
+  border-color: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.toc__title {
+  background: var(--brown-dark);
+}
+
+.toc__menu a {
+  color: var(--gold);
+  border-bottom-color: var(--border);
+}
+
+/* ===========================================
+   12. Author Box
+   =========================================== */
+.authorbox {
+  border-top-color: var(--border);
+  border-bottom-color: var(--border);
+}
+
+.authorbox__avatar {
+  border-color: var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* Pager */
+.pager {
+  border-bottom-color: var(--border);
+}
+
+/* ===========================================
+   13. Sidebar Widgets — individual card style
+   =========================================== */
+.sidebar .widget {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-small);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  transition: box-shadow var(--duration) var(--ease-out);
+}
+
+.sidebar .widget:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.widget__title {
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: none;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  position: relative;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.widget__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-light));
+  border-radius: 1px;
+}
+
+.widget__item {
+  border-bottom-color: var(--border);
+  transition: all var(--duration) var(--ease-out);
+}
+
+.widget__item:hover {
+  color: var(--gold);
+  padding-left: var(--space-xs);
+}
+
+.widget__counter--bubble {
+  color: var(--brown-mid);
+  background: var(--cream-dark);
+}
+
+/* Search Widget */
+.widget-search__form {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+}
+
+.widget-search__field {
+  border-color: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  font-size: 12px;
+}
+
+.widget-search__field:active,
+.widget-search__field:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+/* Tag List Widget */
+.widget-taglist__link {
+  color: var(--brown-mid) !important;
+  background: transparent !important;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 11px;
+  transition: all var(--duration) var(--ease-out);
+}
+
+.widget-taglist__link:hover {
+  color: var(--gold) !important;
+  background: rgba(198, 169, 125, 0.08) !important;
+  border-color: var(--gold);
+}
+
+/* Languages Widget */
+.widget-languages__link-btn {
+  border-radius: 4px;
+}
+
+.widget-languages__link:hover .widget-languages__link-btn {
+  background: var(--gold);
+}
+
+/* ===========================================
+   14. Pagination — bordered + gold fill hover
+   =========================================== */
+.pagination__item {
+  color: var(--brown-dark);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all var(--duration) var(--ease-out);
+}
+
+.pagination__item:hover {
+  color: var(--white);
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(198, 169, 125, 0.25);
+}
+
+.pagination__item--current {
+  color: var(--white);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ===========================================
+   15. Footer — gradient gold top border + centered
+   =========================================== */
+.footer {
+  background: var(--brown-dark);
+  color: var(--brown-light);
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  position: relative;
+  border-top: none;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), var(--gold-light), transparent);
+}
+
+.footer a {
+  color: #d4c4b0;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.footer a:hover {
+  color: var(--gold);
+}
+
+/* ===========================================
+   16. Forms
+   =========================================== */
+input {
+  background: var(--cream);
+  border-color: var(--border);
+}
+
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=tel]:hover,
+input[type=url]:hover,
+textarea:hover {
+  border-color: var(--gold);
+}
+
+input[type=submit],
+input[type=reset] {
+  background: var(--brown-dark);
+  border-radius: var(--radius-pill);
+  transition: background var(--duration) var(--ease-out);
+}
+
+input[type=submit]:hover,
+input[type=reset]:hover {
+  background: var(--gold);
+}
+
+textarea {
+  background: var(--cream);
+  border-color: var(--border);
+}
+
+/* ===========================================
+   17. Tables
+   =========================================== */
+table {
+  border-top-color: var(--border);
+  border-left-color: var(--border);
+}
+
+td, th {
+  border-right-color: var(--border);
+  border-bottom-color: var(--border);
+}
+
+/* ===========================================
+   18. Warning / Empty state
+   =========================================== */
+.warning {
+  border-color: var(--border);
+}
+
+.warning__icon {
+  fill: var(--border);
+}
+
+/* ===========================================
+   19. Animations — staggered fade-in
+   =========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Post cards staggered entry */
+.list__item {
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.list__item:nth-child(1) { animation-delay: 0.05s; }
+.list__item:nth-child(2) { animation-delay: 0.12s; }
+.list__item:nth-child(3) { animation-delay: 0.19s; }
+.list__item:nth-child(4) { animation-delay: 0.26s; }
+.list__item:nth-child(5) { animation-delay: 0.33s; }
+.list__item:nth-child(6) { animation-delay: 0.40s; }
+.list__item:nth-child(7) { animation-delay: 0.47s; }
+.list__item:nth-child(8) { animation-delay: 0.54s; }
+.list__item:nth-child(9) { animation-delay: 0.61s; }
+.list__item:nth-child(10) { animation-delay: 0.68s; }
+
+/* Sidebar widgets staggered entry */
+.sidebar .widget {
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.sidebar .widget:nth-child(1) { animation-delay: 0.1s; }
+.sidebar .widget:nth-child(2) { animation-delay: 0.2s; }
+.sidebar .widget:nth-child(3) { animation-delay: 0.3s; }
+.sidebar .widget:nth-child(4) { animation-delay: 0.4s; }
+.sidebar .widget:nth-child(5) { animation-delay: 0.5s; }
+.sidebar .widget:nth-child(6) { animation-delay: 0.6s; }
+
+/* Single post content fade-in */
+.post__content {
+  animation: fadeInUp 0.6s var(--ease-out) 0.15s both;
+}
+
+/* Accessibility: respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===========================================
+   20. Responsive — mobile adjustments
+   =========================================== */
+@media screen and (max-width: 620px) {
+  /* Remove decorative elements on mobile */
+  .logo__title::before,
+  .logo__title::after {
+    display: none;
+  }
+
+  .logo__title {
+    padding: 0;
+    font-size: 1.3rem;
+  }
+
+  .divider::after {
+    display: none;
+  }
+
+  /* Tighter spacing */
+  .wrapper {
+    padding: var(--space-md);
+  }
+
+  .list__item {
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .list__title {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .meta,
+  .meta a {
+    font-size: 0.625rem;
+  }
+
+  /* Post header left-align on mobile */
+  .post__header {
+    text-align: left;
+  }
+
+  .post__title {
+    font-size: 1.5rem;
+  }
+
+  .post__meta::before,
+  .post__meta::after {
+    left: 0;
+    right: 0;
+  }
+
+  /* Sidebar widgets tighter */
+  .sidebar .widget {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  /* Container no outer radius on mobile */
+  .container--outer {
+    border-radius: 0;
+  }
+
+  /* Footer less padding */
+  .footer {
+    padding: var(--space-xl) var(--space-md);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo__tagline {
+    letter-spacing: 1.5px;
+    font-size: 0.72rem;
+  }
+
+  .list__thumbnail {
+    max-width: 100%;
+  }
+}
